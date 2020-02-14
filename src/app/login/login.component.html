@@ -1,0 +1,6 @@
+<mat-progress-bar *ngIf="busy.isBusy$ | async"></mat-progress-bar>
+<div class="page-container">
+	<div class="button-container">
+		<button mat-raised-button color="primary" *ngFor="let user of availableUsers" (click)="login(user)">{{user | username}}</button>
+	</div>
+</div>

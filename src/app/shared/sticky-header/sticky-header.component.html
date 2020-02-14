@@ -1,0 +1,9 @@
+<div class="container">
+	<div class="header mat-elevation-z4">
+		<div class="greeting">Hello, <strong>{{user | username}}</strong></div>
+		<ng-content select="header-buttons"></ng-content>
+	</div>
+	<div class="content">
+		<ng-content select="page-content"></ng-content>
+	</div>
+</div>

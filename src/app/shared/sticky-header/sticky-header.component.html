@@ -3,6 +3,8 @@
 		<div class="greeting">Hello, <strong>{{user | username}}</strong></div>
 		<ng-content select="header-buttons"></ng-content>
 	</div>
+	<mat-progress-bar *ngIf="busy.isBusy$ | async" mode="indeterminate"></mat-progress-bar>
+	<div style="height: 4px" *ngIf="!(busy.isBusy$ | async)"></div>
 	<div class="content">
 		<ng-content select="page-content"></ng-content>
 	</div>

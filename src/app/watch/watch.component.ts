@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ComponentBase } from '../shared/component-base';
+import { AppState } from '../model';
+import { CommonServices, ComponentBase } from '../shared/component-base';
 
 @Component({
 	template: "",
@@ -8,4 +9,7 @@ import { ComponentBase } from '../shared/component-base';
 })
 export class WatchComponent extends ComponentBase {
 
+	constructor(common: CommonServices) {
+		super(common, AppState.Watch);
+	}
 }

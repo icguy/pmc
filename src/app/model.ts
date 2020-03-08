@@ -15,7 +15,9 @@ export interface Db {
 	movies: {
 		watched: Movie[];
 		current: Movie[];
-		nominated: Movie[];
+		nominated: {
+			[key in User]?: Movie[];
+		}
 		rejected: Movie[];
 	};
 	state: AppState;
@@ -24,9 +26,9 @@ export interface Db {
 export interface Movie {
 	title: string;
 	chosenDate: string;
-	watchedDate: string;
-	nominatedBy: string;
+	watchedDate: string | undefined;
+	nominatedBy: User;
 	score: {
-		[key in User]: number; // score by users
+		[key in User]?: number; // score by users
 	};
 }

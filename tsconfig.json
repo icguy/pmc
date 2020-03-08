@@ -19,7 +19,8 @@
 			"dom"
 		],
 		"strict": true,
-		"strictNullChecks": true
+		"strictNullChecks": true,
+		"strictPropertyInitialization": false
 	},
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,

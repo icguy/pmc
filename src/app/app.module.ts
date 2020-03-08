@@ -1,8 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
@@ -13,6 +17,7 @@ import { NominateComponent } from './nominate/nominate.component';
 import { AppInitService } from './shared/app-init.service';
 import { AuthGuard } from './shared/auth.guard';
 import { BusyService } from './shared/busy.service';
+import { CommonServices } from './shared/component-base';
 import { DbService } from "./shared/db.service";
 import { EnvironmentService } from './shared/environment.service';
 import { NavService } from './shared/nav.service';
@@ -43,8 +48,12 @@ export function appInit(init: AppInitService): () => Promise<void> {
 		BrowserAnimationsModule,
 		MatButtonModule,
 		MatIconModule,
+		MatInputModule,
+		MatFormFieldModule,
 		MatProgressBarModule,
+		MatSnackBarModule,
 		HttpClientModule,
+		ReactiveFormsModule,
 	],
 	providers: [
 		AppInitService,
@@ -53,6 +62,7 @@ export function appInit(init: AppInitService): () => Promise<void> {
 		EnvironmentService,
 		NavService,
 		UserContextService,
+		CommonServices,
 		AuthGuard,
 		{
 			provide: APP_INITIALIZER,

@@ -7,5 +7,24 @@
 			<mat-icon>list</mat-icon>
 		</a>
 	</header-buttons>
-	<page-content>qwer</page-content>
+	<page-content>
+		<h1>Film nevezése</h1>
+		<mat-form-field>
+			<input matInput placeholder="Egyik film" [formControl]="form.movie1">
+			<mat-error *ngIf="form.movie1.hasError('required')">Egyet legalább...</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput placeholder="Másik film" [formControl]="form.movie2">
+			<mat-error *ngIf="form.movie2.hasError('required')">Inkább kettőt ples.</mat-error>
+		</mat-form-field>
+		<div *ngIf="usersPending.length > 0">
+			<span>Még nem szavazott: </span>
+			<span *ngFor="let user of usersPending; last as isLast">{{user | username}}{{isLast ? "" : ", "}}</span>
+		</div>
+		<div class="button-container">
+			<button *ngIf="form.enabled" mat-raised-button color="primary" (click)="ok()">OK</button>
+			<button *ngIf="form.disabled" mat-raised-button color="primary" (click)="refresh()">Újratöltés</button>
+			<button *ngIf="form.disabled" mat-button color="primary" (click)="edit()">Szerkesztés</button>
+		</div>
+	</page-content>
 </sticky-header>

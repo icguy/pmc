@@ -1,11 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from '../model';
 import { BusyService } from '../shared/busy.service';
-import { ComponentBase } from '../shared/component-base';
-import { DbService } from '../shared/db.service';
-import { NavService } from '../shared/nav.service';
+import { CommonServices, ComponentBase } from '../shared/component-base';
 import { storageKeys } from '../shared/storage-keys';
-import { UserContextService } from '../shared/user-context.service';
 
 @Component({
 	templateUrl: "./login.component.html",
@@ -13,19 +10,13 @@ import { UserContextService } from '../shared/user-context.service';
 })
 export class LoginComponent extends ComponentBase implements OnInit {
 
-	public availableUsers!: User[];
+	public availableUsers: User[];
+	public busy: BusyService;
 
-	constructor(
-		db: DbService,
-		nav: NavService,
-		private userContext: UserContextService,
-		public busy: BusyService,
-	) {
-		super(nav, db);
-	}
+	constructor(common: CommonServices) { super(common); }
 
 	public async ngOnInit(): Promise<void> {
-		await super.ngOnInit();
+		await this.busy.doAsync(super.ngOnInit());
 
 		if (this.userContext.currentUser) {
 			this.nav.navigateByState();

@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { User } from '../../model';
+import { BusyService } from '../busy.service';
 import { UserContextService } from '../user-context.service';
 
 @Component({
@@ -7,19 +8,14 @@ import { UserContextService } from '../user-context.service';
 	templateUrl: "./sticky-header.component.html",
 	styleUrls: ["./sticky-header.component.scss"]
 })
-export class StickyHeaderComponent implements OnInit {
+export class StickyHeaderComponent {
 
 	public user: User;
 
 	constructor(
-		// private dbService: DbService,
-		private userContext: UserContextService,
-		// private nav: NavService,
-		// public busy: BusyService,
+		userContext: UserContextService,
+		public busy: BusyService
 	) {
-		this.user = this.userContext.currentUser!;
-	}
-
-	public async ngOnInit(): Promise<void> {
+		this.user = userContext.currentUser!;
 	}
 }

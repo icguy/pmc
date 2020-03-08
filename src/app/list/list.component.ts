@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ComponentBase } from '../shared/component-base';
+import { CommonServices, ComponentBase } from '../shared/component-base';
 
 @Component({
 	template: "",
@@ -8,4 +8,7 @@ import { ComponentBase } from '../shared/component-base';
 })
 export class ListComponent extends ComponentBase {
 
+	constructor(common: CommonServices) {
+		super(common);
+	}
 }

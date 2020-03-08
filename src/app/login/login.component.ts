@@ -25,7 +25,7 @@ export class LoginComponent extends ComponentBase implements OnInit {
 	}
 
 	public async ngOnInit(): Promise<void> {
-		super.ngOnInit();
+		await super.ngOnInit();
 
 		if (this.userContext.currentUser) {
 			this.nav.navigateByState();

@@ -12,15 +12,18 @@ export enum AppState {
 
 export interface Db {
 	users: User[];
-	movies: {
-		watched: Movie[];
-		current: Movie[];
-		nominated: {
+	movies?: {
+		watched?: Movie[];
+		current?: Movie[];
+		nominated?: {
 			[key in User]?: Movie[];
 		}
-		rejected: Movie[];
+		rejected?: Movie[];
 	};
 	state: AppState;
+	log: {
+		[key: string]: LogData;
+	};
 }
 
 export interface Movie {
@@ -31,4 +34,10 @@ export interface Movie {
 	score: {
 		[key in User]?: number; // score by users
 	};
+}
+
+export interface LogData {
+	eventType: string;
+	user: User | undefined;
+	data?: any;
 }

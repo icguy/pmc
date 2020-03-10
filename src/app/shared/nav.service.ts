@@ -8,7 +8,7 @@ export class NavService {
 	constructor(private router: Router, private db: DbService) { }
 
 	public navigateByState(): void {
-		switch (this.db.db.state) {
+		switch (this.db.state) {
 			case AppState.Nominate: this.router.navigate(["nominate"]); break;
 			case AppState.Vote: this.router.navigate(["vote"]); break;
 			case AppState.Watch: this.router.navigate(["watch"]); break;

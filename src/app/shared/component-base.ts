@@ -40,9 +40,8 @@ export class ComponentBase implements OnInit {
 	public async refresh(): Promise<void> {
 		await this.busy.doAsync((async () => {
 			await this.db.refreshDb();
-			await this.db.consolidateStateIfNecessary();
 		})());
-		if (this.activeState && this.db.db.state !== this.activeState) {
+		if (this.activeState && this.db.state !== this.activeState) {
 			this.nav.navigateByState();
 		}
 	}

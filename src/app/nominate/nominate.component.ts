@@ -71,8 +71,6 @@ export class NominateComponent extends ComponentBase implements OnInit {
 			let usersVoted = this.db.db.users.filter(u => this.db.db.movies?.nominated?.[u]);
 			this.usersPending = this.db.db.users.filter(u => !usersVoted.includes(u));
 			if (this.usersPending.length === 0) {
-				await this.db.updateState(AppState.Vote);
-				this.db.db.state = AppState.Vote;
 				this.nav.navigateByState();
 			}
 		})());

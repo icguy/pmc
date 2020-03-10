@@ -9,6 +9,18 @@ import { UserContextService } from './user-context.service';
 export class DbService {
 
 	public db: Db;
+
+	public get state(): AppState {
+		let hasCurrentMovies = (this.db.movies?.current?.length || 0) > 0;
+		let allUsershaveNominatedMovies = this.db.users
+			.map(u => this.db.movies?.nominated?.[u])
+			.every(m => m && m.length === 2);
+
+		if (hasCurrentMovies) return AppState.Watch;
+		else if (allUsershaveNominatedMovies) return AppState.Vote;
+		else return AppState.Nominate;
+	}
+
 	private dbBaseUrl: string;
 
 	constructor(private http: HttpClient, private userContext: UserContextService, environment: EnvironmentService) {
@@ -29,7 +41,6 @@ export class DbService {
 					rejected: [],
 					watched: []
 				},
-				state: AppState.Nominate,
 				log: {},
 			};
 			this.db = await this.http.put<Db>(url, db).toPromise();
@@ -41,30 +52,6 @@ export class DbService {
 		let url = this.getUrl("movies", "nominated", this.userContext.currentUser as string);
 		await this.log({ eventType: "nominate", data: [movie1, movie2].map(m => m.title) });
 		await this.http.put(url, [movie1, movie2]).toPromise();
-	}
-
-	public async updateState(state: AppState): Promise<void> {
-		let url = this.getUrl("state");
-		await this.log({ eventType: "update state", data: state });
-		await this.http.put(url, JSON.stringify(state)).toPromise();
-	}
-
-	public async consolidateStateIfNecessary(): Promise<void> {
-		let hasCurrentMovies = (this.db.movies?.current?.length || 0) > 0;
-		let allUsershaveNominatedMovies = this.db.users
-			.map(u => this.db.movies?.nominated?.[u])
-			.every(m => m && m.length === 2);
-
-		let state: AppState;
-		if (hasCurrentMovies) state = AppState.Watch;
-		else if (allUsershaveNominatedMovies) state = AppState.Vote;
-		else state = AppState.Nominate;
-
-		if (this.db.state !== state) {
-			await this.log({ eventType: "consolidate", data: `state: ${state}` });
-			let url = this.getUrl("state");
-			await this.http.put(url, JSON.stringify(state)).toPromise();
-		}
 	}
 
 	private getUrl(...segments: (string | number)[]): string {

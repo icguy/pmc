@@ -20,7 +20,6 @@ export interface Db {
 		}
 		rejected?: Movie[];
 	};
-	state: AppState;
 	log: {
 		[key: string]: LogData;
 	};

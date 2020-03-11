@@ -15,15 +15,17 @@ export interface Db {
 	movies?: {
 		watched?: Movie[];
 		current?: Movie[];
-		nominated?: {
-			[key in User]?: Movie[];
-		}
+		nominated?: NominatedMovies;
 		rejected?: Movie[];
 	};
 	log: {
 		[key: string]: LogData;
 	};
 }
+
+export type NominatedMovies = {
+	[key in User]?: Movie[]
+};
 
 export interface Movie {
 	title: string;

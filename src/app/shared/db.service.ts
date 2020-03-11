@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import * as moment from "moment";
-import { AppState, Db, Movie, User, LogData } from "../model";
+import { AppState, Db, Movie, User, LogData, NominatedMovies } from "../model";
 import { EnvironmentService } from './environment.service';
 import { UserContextService } from './user-context.service';
 
@@ -52,6 +52,16 @@ export class DbService {
 		let url = this.getUrl("movies", "nominated", this.userContext.currentUser as string);
 		await this.log({ eventType: "nominate", data: [movie1, movie2].map(m => m.title) });
 		await this.http.put(url, [movie1, movie2]).toPromise();
+	}
+
+	public async vote(movies: NominatedMovies): Promise<void> {
+		let currentUser = this.userContext.currentUser!;
+		for (let user of this.db.users) {
+			for (let userMovie of movies[user] || []) {
+				let url = this.getUrl("movies", "nominated", user, "score", currentUser);
+				await this.http.put(url, userMovie.score[currentUser]).toPromise();
+			}
+		}
 	}
 
 	private getUrl(...segments: (string | number)[]): string {

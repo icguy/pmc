@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,7 @@ import { BusyService } from './shared/busy.service';
 import { CommonServices } from './shared/component-base';
 import { DbService } from "./shared/db.service";
 import { EnvironmentService } from './shared/environment.service';
+import "./shared/extensions/extensions-impl";
 import { NavService } from './shared/nav.service';
 import { StickyHeaderComponent } from './shared/sticky-header/sticky-header.component';
 import { UserContextService } from './shared/user-context.service';
@@ -46,6 +48,7 @@ export function appInit(init: AppInitService): () => Promise<void> {
 		AppRoutingModule,
 		BrowserModule,
 		BrowserAnimationsModule,
+		DragDropModule,
 		MatButtonModule,
 		MatIconModule,
 		MatInputModule,

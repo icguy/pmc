@@ -18,7 +18,7 @@
 			<mat-error *ngIf="form.movie2.hasError('required')">Inkább kettőt ples.</mat-error>
 		</mat-form-field>
 		<div *ngIf="usersPending.length > 0">
-			<span>Még nem szavazott: </span>
+			<span>Még nem nevezett: </span>
 			<span *ngFor="let user of usersPending; last as isLast">{{user | username}}{{isLast ? "" : ", "}}</span>
 		</div>
 		<div class="button-container">

@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { AppState, Movie, User, NominatedMovies } from '../model';
 import { CommonServices, ComponentBase } from '../shared/component-base';
 
-interface MovieAndIndex {
+interface MovieModel {
 	movie: Movie;
 	dbIndex: number;
+	searchUrl: string;
 }
 
 @Component({
@@ -14,7 +15,7 @@ interface MovieAndIndex {
 })
 export class VoteComponent extends ComponentBase implements OnInit {
 
-	public movies: MovieAndIndex[] = [];
+	public movies: MovieModel[] = [];
 	public usersPending: User[] = [];
 	public get isEditable(): boolean { return this.usersPending.includes(this.userContext.currentUser!); }
 
@@ -33,6 +34,8 @@ export class VoteComponent extends ComponentBase implements OnInit {
 	public async ok(): Promise<void> {
 		await this.busy.doAsync((async () => {
 			this.movies.forEach((m, idx, arr) => {
+				if (!m.movie.score)
+					m.movie.score = {};
 				m.movie.score[this.userContext.currentUser!] = arr.length - idx;
 			});
 
@@ -51,21 +54,27 @@ export class VoteComponent extends ComponentBase implements OnInit {
 	}
 
 	public edit(): void {
-
+		this.usersPending.push(this.userContext.currentUser!);
 	}
 
 	public async refresh(): Promise<void> {
+		let user = this.userContext.currentUser!;
 		await this.busy.doAsync((async () => {
 			await super.refresh();
-			this.movies = this.db.db.users.flatMap(u => {
-				let nominated = this.db.db.movies?.nominated?.[u] || [];
-				return nominated.map<MovieAndIndex>((val, idx) => ({
-					movie: val,
-					dbIndex: idx
-				}));
-			});
+			this.movies = this.db.db.users
+				.flatMap(u => {
+					let nominated = this.db.db.movies?.nominated?.[u] || [];
+					return nominated.map<MovieModel>((val, idx) => ({
+						movie: val,
+						dbIndex: idx,
+						searchUrl: `https://www.youtube.com/results?search_query=${window.encodeURI(val.title)}`
+					}));
+				})
+				.sort((a, b) => (a.movie.score?.[user] || -1) - (b.movie.score?.[user] || -1))
+				.reverse();
 			this.usersPending = this.db.db.users.filter(u => this.movies.some(m => !m.movie.score?.[u]));
 			if (this.usersPending.length === 0) {
+				await this.db.startWatch();
 				this.nav.navigateByState();
 			}
 		})());

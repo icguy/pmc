@@ -21,7 +21,7 @@
 			<span>Még nem nevezett: </span>
 			<span *ngFor="let user of usersPending; last as isLast">{{user | username}}{{isLast ? "" : ", "}}</span>
 		</div>
-		<div class="button-container">
+		<div class="top-margin">
 			<button *ngIf="form.enabled" mat-raised-button color="primary" (click)="ok()">OK</button>
 			<button *ngIf="form.disabled" mat-raised-button color="primary" (click)="refresh()">Újratöltés</button>
 			<button *ngIf="form.disabled" mat-button color="primary" (click)="edit()">Szerkesztés</button>

@@ -14,3 +14,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-form-field {
 	margin: .5rem;
 }
+
+button + button.mat-button {
+	margin-left: 1rem;
+}
+
+.top-margin {
+	margin-top: 1rem;
+}

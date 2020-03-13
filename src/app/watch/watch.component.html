@@ -1,8 +1,11 @@
 <sticky-header>
 	<header-buttons>
 		<button mat-icon-button (click)="refresh()">
-			<mat-icon>refresh</mat-icon>
+			<fa-icon icon="sync"></fa-icon>
 		</button>
+		<a mat-icon-button [routerLink]="['/', 'list']">
+			<fa-icon icon="list"></fa-icon>
+		</a>
 	</header-buttons>
 	<page-content>
 		<h1>Elő a popcornnal!</h1>

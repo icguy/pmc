@@ -25,6 +25,10 @@ export class MovieDetailComponent {
 		this.users = this.db.db.users;
 	}
 
+	public getScore(user: User): number {
+		return this.movie.score?.[user] || 0;
+	}
+
 	private calculateScore(movie: Movie): void {
 		this.totalScore = this.db.db.users
 			.map(u => movie.score?.[u] || 0)

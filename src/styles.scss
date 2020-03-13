@@ -5,11 +5,17 @@ $pmc-primary: mat-palette($mat-green, 900);
 $pmc-accent: mat-palette($mat-blue-grey, 700);
 $pmc-warn: mat-palette($mat-red);
 $pmc-theme: mat-light-theme($pmc-primary, $pmc-accent, $pmc-warn);
-
 @include angular-material-theme($pmc-theme);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body,
+html {
+	height: 100%;
+}
+
+body {
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+	margin: 0;
+}
 
 mat-form-field {
 	margin: .5rem;
@@ -17,6 +23,10 @@ mat-form-field {
 
 button + button.mat-button {
 	margin-left: 1rem;
+}
+
+*[mat-icon-button] + *[mat-icon-button] {
+	margin-left: .5rem;
 }
 
 .top-margin {

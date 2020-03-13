@@ -4,12 +4,13 @@ import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import * as fa from '@fortawesome/free-solid-svg-icons';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ListComponent } from './list/list.component';
@@ -51,8 +52,8 @@ export function appInit(init: AppInitService): () => Promise<void> {
 		BrowserModule,
 		BrowserAnimationsModule,
 		DragDropModule,
+		FontAwesomeModule,
 		MatButtonModule,
-		MatIconModule,
 		MatInputModule,
 		MatFormFieldModule,
 		MatProgressBarModule,
@@ -79,4 +80,8 @@ export function appInit(init: AppInitService): () => Promise<void> {
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+	constructor(library: FaIconLibrary) {
+		library.addIcons(fa.faSync, fa.faList, fa.faFilm);
+	}
+}

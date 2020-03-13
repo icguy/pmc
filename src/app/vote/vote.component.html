@@ -1,8 +1,11 @@
 <sticky-header>
 	<header-buttons>
 		<button mat-icon-button (click)="refresh()">
-			<mat-icon>refresh</mat-icon>
+			<fa-icon icon="sync" size="lg"></fa-icon>
 		</button>
+		<a mat-icon-button [routerLink]="['/', 'list']">
+			<fa-icon icon="list" size="lg"></fa-icon>
+		</a>
 	</header-buttons>
 	<page-content>
 		<h1>Szavazás</h1>
@@ -12,7 +15,7 @@
 				<div class="list-item mat-elevation-z3" *ngFor="let movie of movies" cdkDrag>
 					<span>{{movie.movie.title}} ({{movie.movie.nominatedBy | username}})</span>
 					<a mat-icon-button [href]="movie.searchUrl" target="_blank">
-						<mat-icon>theaters</mat-icon>
+						<fa-icon icon="film" size="lg"></fa-icon>
 					</a>
 				</div>
 			</div>
@@ -22,7 +25,7 @@
 				<div class="list-item mod-readonly" *ngFor="let movie of movies">
 					<span>{{movie.movie.title}} ({{movie.movie.nominatedBy | username}})</span>
 					<a mat-icon-button [href]="movie.searchUrl" target="_blank">
-						<mat-icon>theaters</mat-icon>
+						<fa-icon icon="film" size="lg"></fa-icon>
 					</a>
 				</div>
 			</div>

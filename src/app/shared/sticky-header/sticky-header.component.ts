@@ -14,7 +14,7 @@ export class StickyHeaderComponent {
 
 	constructor(
 		userContext: UserContextService,
-		public busy: BusyService
+		public busy: BusyService,
 	) {
 		this.user = userContext.currentUser!;
 	}

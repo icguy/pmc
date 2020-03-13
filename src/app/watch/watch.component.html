@@ -6,6 +6,9 @@
 		<a mat-icon-button [routerLink]="['/', 'list']">
 			<fa-icon icon="list"></fa-icon>
 		</a>
+		<button mat-icon-button (click)="logout()">
+			<fa-icon icon="sign-out-alt" size="lg"></fa-icon>
+		</button>
 	</header-buttons>
 	<page-content>
 		<h1>Elő a popcornnal! 🍿</h1>

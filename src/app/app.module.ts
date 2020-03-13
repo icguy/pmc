@@ -94,6 +94,14 @@ export function appInit(init: AppInitService): () => Promise<void> {
 export class AppModule {
 	constructor(library: FaIconLibrary) {
 		registerLocaleData(localeHu);
-		library.addIcons(fa.faSync, fa.faList, fa.faFilm, fa.faCheckCircle, fa.faTimesCircle, fa.faArrowLeft);
+		library.addIcons(
+			fa.faSync,
+			fa.faList,
+			fa.faFilm,
+			fa.faCheckCircle,
+			fa.faTimesCircle,
+			fa.faArrowLeft,
+			fa.faSignOutAlt
+		);
 	}
 }

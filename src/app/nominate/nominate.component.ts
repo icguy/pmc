@@ -33,7 +33,7 @@ export class NominateComponent extends PageComponentBase implements OnInit {
 	}
 
 	public async ngOnInit(): Promise<void> {
-		await super.ngOnInit();
+		await super.refresh();
 	}
 
 	public async ok(): Promise<void> {

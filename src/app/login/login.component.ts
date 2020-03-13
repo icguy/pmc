@@ -16,7 +16,7 @@ export class LoginComponent extends PageComponentBase implements OnInit {
 	constructor(common: CommonServices) { super(common); }
 
 	public async ngOnInit(): Promise<void> {
-		await this.busy.doAsync(super.ngOnInit());
+		await this.busy.doAsync(super.refresh(false));
 
 		if (this.userContext.currentUser) {
 			this.nav.navigateByState();

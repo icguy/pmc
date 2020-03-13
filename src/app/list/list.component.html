@@ -1,0 +1,18 @@
+<sticky-header>
+	<header-buttons>
+		<a mat-icon-button [routerLink]="['/']">
+			<fa-icon icon="arrow-left"></fa-icon>
+		</a>
+	</header-buttons>
+	<page-content>
+		<mat-form-field>
+			<mat-select [(ngModel)]="currentOption">
+				<mat-option [value]="'watched'">Megnézett filmek</mat-option>
+				<mat-option [value]="'rejected'">Jelölt filmek</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<div *ngFor="let movie of movies">
+			<movie-detail [movie]="movie" [movieState]="'none'"></movie-detail>
+		</div>
+	</page-content>
+</sticky-header>

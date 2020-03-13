@@ -16,7 +16,7 @@ export class CommonServices {
 	}
 }
 
-export class PageComponentBase implements OnInit {
+export class PageComponentBase {
 
 	protected readonly nav: NavService;
 	protected readonly db: DbService;
@@ -33,15 +33,11 @@ export class PageComponentBase implements OnInit {
 		this.userContext = common.userContext;
 	}
 
-	public async ngOnInit(): Promise<void> {
-		await this.refresh();
-	}
-
-	public async refresh(): Promise<void> {
+	public async refresh(shouldNavigate?: boolean): Promise<void> {
 		await this.busy.doAsync((async () => {
 			await this.db.refreshDb();
 		})());
-		if (this.activeState && this.db.state !== this.activeState) {
+		if (this.activeState && this.db.state !== this.activeState && shouldNavigate !== false) {
 			this.nav.navigateByState();
 		}
 	}

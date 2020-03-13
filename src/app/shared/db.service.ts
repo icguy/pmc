@@ -12,8 +12,7 @@ export class DbService {
 
 	public get state(): AppState {
 		let currentMovies = this.db.movies?.current || [];
-		let hasMoviesToWatch = currentMovies.length > 0
-			&& currentMovies.filter(m => !!m.watchedDate).length < this.db.users.length;
+		let hasMoviesToWatch = currentMovies.length > 0;
 
 		let allUsershaveNominatedMovies = this.db.users
 			.map(u => this.db.movies?.nominated?.[u])
@@ -89,6 +88,38 @@ export class DbService {
 		await this.http.put(currentUrl, allNominated).toPromise();
 		let nominatedUrl = this.getUrl("movies", "nominated");
 		await this.http.delete(nominatedUrl).toPromise();
+		await this.refreshDb();
+	}
+
+	public async setWatchedDate(dbIdx: number, now: string | undefined): Promise<void> {
+		await this.log("set watch date", now);
+		let url = this.getUrl("movies", "current", dbIdx, "watchedDate");
+		if (now)
+			await this.http.put(url, JSON.stringify(now)).toPromise();
+		else
+			await this.http.delete(url).toPromise();
+	}
+
+	public async newRound(): Promise<void> {
+		await this.log("new round");
+
+		let watchedMovies = [
+			...this.db.movies?.watched || [],
+			...this.db.movies?.current?.filter(m => m.watchedDate) || []
+		];
+		let watchedUrl = this.getUrl("movies", "watched");
+		await this.http.put(watchedUrl, watchedMovies).toPromise();
+
+		let rejectedMovies = [
+			...this.db.movies?.rejected || [],
+			...this.db.movies?.current?.filter(m => !m.watchedDate) || []
+		];
+		let rejectedUrl = this.getUrl("movies", "rejected");
+		await this.http.put(rejectedUrl, rejectedMovies).toPromise();
+
+		let currentUrl = this.getUrl("movies", "current");
+		await this.http.delete(currentUrl).toPromise();
+
 		await this.refreshDb();
 	}
 

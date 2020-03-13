@@ -27,14 +27,16 @@ export type NominatedMovies = {
 	[key in User]?: Movie[]
 };
 
+export type MovieScores = {
+	[key in User]?: number; // score by users
+};
+
 export interface Movie {
 	title: string;
 	chosenDate: string;
 	watchedDate: string | undefined;
 	nominatedBy: User;
-	score: {
-		[key in User]?: number; // score by users
-	};
+	score: MovieScores;
 }
 
 export interface LogData {

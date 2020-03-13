@@ -8,9 +8,9 @@
 		</a>
 	</header-buttons>
 	<page-content>
-		<h1>Elő a popcornnal!</h1>
+		<h1>Elő a popcornnal! 🍿</h1>
 		<div *ngFor="let movie of movies">
-			<movie-detail [movie]="movie"></movie-detail>
+			<movie-detail [movie]="movie.movie" [movieState]="movie.state" (watched)="watched(movie)"></movie-detail>
 		</div>
 	</page-content>
 </sticky-header>

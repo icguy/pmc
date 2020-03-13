@@ -1,8 +1,11 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+import localeHu from '@angular/common/locales/hu';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from "@angular/core";
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
@@ -54,6 +57,7 @@ export function appInit(init: AppInitService): () => Promise<void> {
 		DragDropModule,
 		FontAwesomeModule,
 		MatButtonModule,
+		MatExpansionModule,
 		MatInputModule,
 		MatFormFieldModule,
 		MatProgressBarModule,
@@ -75,6 +79,10 @@ export function appInit(init: AppInitService): () => Promise<void> {
 			useFactory: appInit,
 			deps: [AppInitService],
 			multi: true
+		},
+		{
+			provide: LOCALE_ID,
+			useValue: 'hu-HU'
 		}
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -82,6 +90,7 @@ export function appInit(init: AppInitService): () => Promise<void> {
 })
 export class AppModule {
 	constructor(library: FaIconLibrary) {
-		library.addIcons(fa.faSync, fa.faList, fa.faFilm);
+		registerLocaleData(localeHu);
+		library.addIcons(fa.faSync, fa.faList, fa.faFilm, fa.faCheckCircle, fa.faTimesCircle, fa.faArrowLeft);
 	}
 }

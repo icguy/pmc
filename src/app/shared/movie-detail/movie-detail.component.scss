@@ -1,0 +1,28 @@
+.title {
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding-bottom: .5rem;
+
+	fa-icon {
+		margin-right: .5rem;
+	}
+}
+
+.title-container {
+	padding: .5rem 0;
+}
+
+$separator-padding: .5rem;
+
+.separator {
+	padding-right: $separator-padding;
+}
+
+.separator + .separator {
+	border-left: 1px solid;
+	padding-left: $separator-padding;
+}
+
+.movie-buttons {
+	margin-top: .5rem;
+}

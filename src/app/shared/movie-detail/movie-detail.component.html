@@ -1,8 +1,31 @@
-<div>
-	<div class="title">{{movie.title}}</div>
-	<div>Választotta: {{movie.nominatedBy | username}}</div>
-	<div *ngFor="let user of users">{{user | username}}: {{getScore(user)}} pont</div>
-	<div>Összesen: {{totalScore}} pont</div>
-	<div>Kiválasztva: {{movie.chosenDate | date}}</div>
+<mat-expansion-panel>
+	<mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+		<div class="title-container">
+			<div class="title">
+				<fa-icon *ngIf="movieState === 'watched'" icon="check-circle" style="color: #080"></fa-icon>
+				<fa-icon *ngIf="movieState === 'rejected'" icon="times-circle" style="color: #b00"></fa-icon>
+				<span>{{movie.title}}</span>
+			</div>
+			<div>
+				<span class="separator">Javasolta: {{movie.nominatedBy | username}}</span>
+				<span class="separator">Összesen: {{totalScore}} pont</span>
+			</div>
+		</div>
+	</mat-expansion-panel-header>
+	<div>
+		<span *ngFor="let user of users" class="separator">
+			<span>{{user | username}}: {{getScore(user)}} pont</span>
+		</span>
+	</div>
+	<div>
+	</div>
+	<div>
+		<span>Kiválasztva: {{movie.chosenDate | date}}</span>
+	</div>
 	<div *ngIf="movie.watchedDate">Megnézve: {{movie.watchedDate | date}}</div>
-</div>
+	<div>
+		<div class="movie-buttons" *ngIf="movieState === 'pending'">
+			<button mat-raised-button color="primary" (click)="watched.next()">Megnéztük</button>
+		</div>
+	</div>
+</mat-expansion-panel>

@@ -1,0 +1,13 @@
+<sticky-header>
+	<header-buttons>
+		<button mat-icon-button (click)="refresh()">
+			<mat-icon>refresh</mat-icon>
+		</button>
+	</header-buttons>
+	<page-content>
+		<h1>Elő a popcornnal!</h1>
+		<div *ngFor="let movie of movies">
+			<movie-detail [movie]="movie"></movie-detail>
+		</div>
+	</page-content>
+</sticky-header>

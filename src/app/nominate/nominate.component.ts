@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from "moment";
 import { AppState, Movie, User } from '../model';
-import { CommonServices, ComponentBase } from '../shared/component-base';
+import { CommonServices, PageComponentBase } from '../shared/page-component-base';
 
 class NominateForm extends FormGroup {
 
@@ -22,7 +22,7 @@ class NominateForm extends FormGroup {
 	templateUrl: "./nominate.component.html",
 	styleUrls: ["./nominate.component.scss"]
 })
-export class NominateComponent extends ComponentBase implements OnInit {
+export class NominateComponent extends PageComponentBase implements OnInit {
 
 	public form: NominateForm;
 	public usersPending: User[] = [];

@@ -1,0 +1,8 @@
+<div>
+	<div class="title">{{movie.title}}</div>
+	<div>Választotta: {{movie.nominatedBy | username}}</div>
+	<div *ngFor="let user of users">{{user | username}}: {{movie.score[user]}} pont</div>
+	<div>Összesen: {{totalScore}} pont</div>
+	<div>Kiválasztva: {{movie.chosenDate | date}}</div>
+	<div *ngIf="movie.watchedDate">Megnézve: {{movie.watchedDate | date}}</div>
+</div>

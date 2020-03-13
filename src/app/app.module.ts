@@ -18,11 +18,12 @@ import { NominateComponent } from './nominate/nominate.component';
 import { AppInitService } from './shared/app-init.service';
 import { AuthGuard } from './shared/auth.guard';
 import { BusyService } from './shared/busy.service';
-import { CommonServices } from './shared/component-base';
 import { DbService } from "./shared/db.service";
 import { EnvironmentService } from './shared/environment.service';
 import "./shared/extensions/extensions-impl";
+import { MovieDetailComponent } from './shared/movie-detail/movie-detail.component';
 import { NavService } from './shared/nav.service';
+import { CommonServices } from './shared/page-component-base';
 import { StickyHeaderComponent } from './shared/sticky-header/sticky-header.component';
 import { UserContextService } from './shared/user-context.service';
 import { UserNamePipe } from './shared/user-name.pipe';
@@ -38,6 +39,7 @@ export function appInit(init: AppInitService): () => Promise<void> {
 		AppComponent,
 		LoginComponent,
 		UserNamePipe,
+		MovieDetailComponent,
 		NominateComponent,
 		VoteComponent,
 		WatchComponent,

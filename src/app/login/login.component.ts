@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from '../model';
 import { BusyService } from '../shared/busy.service';
-import { CommonServices, ComponentBase } from '../shared/component-base';
+import { CommonServices, PageComponentBase } from '../shared/page-component-base';
 import { storageKeys } from '../shared/storage-keys';
 
 @Component({
 	templateUrl: "./login.component.html",
 	styleUrls: ["./login.component.scss"]
 })
-export class LoginComponent extends ComponentBase implements OnInit {
+export class LoginComponent extends PageComponentBase implements OnInit {
 
 	public availableUsers: User[];
 	public busy: BusyService;

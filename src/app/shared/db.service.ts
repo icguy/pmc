@@ -11,12 +11,15 @@ export class DbService {
 	public db: Db;
 
 	public get state(): AppState {
-		let hasCurrentMovies = (this.db.movies?.current?.length || 0) > 0;
+		let currentMovies = this.db.movies?.current || [];
+		let hasMoviesToWatch = currentMovies.length > 0
+			&& currentMovies.filter(m => !!m.watchedDate).length < this.db.users.length;
+
 		let allUsershaveNominatedMovies = this.db.users
 			.map(u => this.db.movies?.nominated?.[u])
 			.every(m => m && m.length === 2);
 
-		if (hasCurrentMovies) return AppState.Watch;
+		if (hasMoviesToWatch) return AppState.Watch;
 		else if (allUsershaveNominatedMovies) return AppState.Vote;
 		else return AppState.Nominate;
 	}

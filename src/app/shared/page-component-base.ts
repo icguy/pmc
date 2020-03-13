@@ -16,7 +16,7 @@ export class CommonServices {
 	}
 }
 
-export class ComponentBase implements OnInit {
+export class PageComponentBase implements OnInit {
 
 	protected readonly nav: NavService;
 	protected readonly db: DbService;

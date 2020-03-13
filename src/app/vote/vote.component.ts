@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { AppState, Movie, User, NominatedMovies } from '../model';
-import { CommonServices, ComponentBase } from '../shared/component-base';
+import { CommonServices, PageComponentBase } from '../shared/page-component-base';
 
 interface MovieModel {
 	movie: Movie;
@@ -13,7 +13,7 @@ interface MovieModel {
 	templateUrl: "./vote.component.html",
 	styleUrls: ["./vote.component.scss"]
 })
-export class VoteComponent extends ComponentBase implements OnInit {
+export class VoteComponent extends PageComponentBase implements OnInit {
 
 	public movies: MovieModel[] = [];
 	public usersPending: User[] = [];

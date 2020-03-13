@@ -24,7 +24,7 @@ export class VoteComponent extends PageComponentBase implements OnInit {
 	}
 
 	public async ngOnInit(): Promise<void> {
-		await super.refresh();
+		await this.refresh();
 	}
 
 	public drop(event: CdkDragDrop<string[]>): void {

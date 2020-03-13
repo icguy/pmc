@@ -24,7 +24,7 @@ export class WatchComponent extends PageComponentBase implements OnInit {
 	}
 
 	public async ngOnInit(): Promise<void> {
-		await super.refresh();
+		await this.refresh();
 	}
 
 	public async watched(movie: MovieModel): Promise<void> {

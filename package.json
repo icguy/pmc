@@ -5,7 +5,6 @@
 		"ng": "ng",
 		"start": "ng serve",
 		"build": "ng build",
-		"build:release": "ng build --prod --base-href=/pmc/",
 		"test": "ng test",
 		"lint": "ng lint"
 	},

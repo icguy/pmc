@@ -1,0 +1,22 @@
+<sticky-header>
+	<header-buttons>
+		<a mat-icon-button [disabled]="isBusy$ | async" [routerLink]="['/']">
+			<fa-icon icon="arrow-left"></fa-icon>
+		</a>
+	</header-buttons>
+	<page-content>
+		<div *ngFor="let movieControl of moviesForm.controls; let idx = index">
+			<mat-form-field>
+				<input matInput placeholder="Film címe" [formControl]="movieControl">
+			</mat-form-field>
+			<button mat-icon-button (click)="remove(idx)">
+				<fa-icon icon="times"></fa-icon>
+			</button>
+		</div>
+		<div>
+			<button mat-fab color="primary" (click)="addNew()">
+				<fa-icon icon="plus"></fa-icon>
+			</button>
+		</div>
+	</page-content>
+</sticky-header>

@@ -44,6 +44,7 @@ export class DbService {
 					watched: []
 				},
 				log: {},
+				notes: {}
 			};
 			this.db = await this.http.put<Db>(url, db).toPromise();
 		}
@@ -121,6 +122,12 @@ export class DbService {
 		await this.http.delete(currentUrl).toPromise();
 
 		await this.refreshDb();
+	}
+
+	public async saveNotes(notes: string[]): Promise<void> {
+		let currentUser = this.userContext.currentUser!;
+		let url = this.getUrl("notes", currentUser as string);
+		await this.http.put(url, notes).toPromise();
 	}
 
 	private getUrl(...segments: (string | number)[]): string {

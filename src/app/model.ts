@@ -18,18 +18,17 @@ export interface Db {
 		nominated?: NominatedMovies;
 		rejected?: Movie[];
 	};
+	notes?: Notes;
 	log: {
 		[key: string]: LogData;
 	};
 }
 
-export type NominatedMovies = {
-	[key in User]?: Movie[]
-};
+export type ByUser<T> = { [key in User]?: T };
 
-export type MovieScores = {
-	[key in User]?: number; // score by users
-};
+export type Notes = ByUser<string>;
+export type NominatedMovies = ByUser<Movie[]>;
+export type MovieScores = ByUser<number>;
 
 export interface Movie {
 	title: string;

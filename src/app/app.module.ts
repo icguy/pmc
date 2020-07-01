@@ -3,7 +3,7 @@ import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeHu from '@angular/common/locales/hu';
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from "@angular/core";
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -20,6 +20,7 @@ import { AppComponent } from "./app.component";
 import { ListComponent } from './list/list.component';
 import { LoginComponent } from "./login/login.component";
 import { NominateComponent } from './nominate/nominate.component';
+import { NotesComponent } from "./notes/notes.component";
 import { AppInitService } from './shared/app-init.service';
 import { AuthGuard } from './shared/auth.guard';
 import { BusyService } from './shared/busy.service';
@@ -50,6 +51,7 @@ export function appInit(init: AppInitService): () => Promise<void> {
 		WatchComponent,
 		StickyHeaderComponent,
 		ListComponent,
+		NotesComponent,
 	],
 	imports: [
 		AppRoutingModule,
@@ -101,7 +103,10 @@ export class AppModule {
 			fa.faCheckCircle,
 			fa.faTimesCircle,
 			fa.faArrowLeft,
-			fa.faSignOutAlt
+			fa.faSignOutAlt,
+			fa.faClipboard,
+			fa.faPlus,
+			fa.faTimes,
 		);
 	}
 }
